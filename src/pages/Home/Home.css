@@ -1,0 +1,102 @@
+#app { height: 100% }
+html,
+body {
+  position: relative;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.transition-text {
+    position: relative;
+    bottom: 200px; /* Start position */
+    animation: slideDown 1s ease-in-out;
+  }
+  
+  @keyframes slideDown {
+    0% {
+        opacity: 0;
+      bottom: 200px;
+    }
+    100% {
+        opacity: 1;
+      bottom: 350px; /* End position */
+    }
+  }
+  .text-fixed {
+    position: relative;
+    bottom: 350px; /* Fixed position after animation */
+  }
+
+  .transition-text-sub {
+    position: relative;
+    bottom: 150px; /* Start position */
+    animation: slideDown-sub 1.3s ease-in-out;
+  }
+  
+  @keyframes slideDown-sub {
+    0% {
+        opacity: 0;
+      bottom: 150px;
+    }
+    100% {
+        opacity: 1;
+      bottom: 290px; /* End position */
+    }
+  }
+  .text-fixed-sub {
+    position: relative;
+    bottom: 290px; /* Fixed position after animation */
+  }
+  .transition-text-text {
+    position: relative;
+    bottom: 90px; /* Start position */
+    animation: slideDown-text 1.6s ease-in-out;
+  }
+  
+  @keyframes slideDown-text {
+    0% {
+        opacity: 0;
+      bottom: 90px;
+    }
+    100% {
+        opacity: 1;
+      bottom: 230px; /* End position */
+    }
+  }
+  .text-fixed-text {
+    position: relative;
+    bottom: 230px; /* Fixed position after animation */
+  }
+  .transition-btn {
+    position: relative;
+    bottom: 60px; /* Start position */
+    animation: slideDown-btn 1.9s ease-in-out;
+  }
+  
+  @keyframes slideDown-btn {
+    0% {
+        opacity: 0;
+      bottom: 60px;
+    }
+    100% {
+        opacity: 1;
+      bottom: 160px; /* End position */
+    }
+  }
+  .btn-fixed {
+    position: relative;
+    bottom: 160px; /* Fixed position after animation */
+  }
+
+  .noElement{
+    visibility: hidden;
+  }
