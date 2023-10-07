@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 import { BsSearch, BsBag } from "react-icons/bs";
-import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineUser, AiOutlineLogin } from "react-icons/ai";
+import { RiLogoutCircleLine } from "react-icons/ri";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { TbJewishStar } from "react-icons/tb";
 import { motion } from "framer-motion";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
@@ -13,6 +16,36 @@ const Header = () => {
   const toggleDrawer = (): void => {
     setIsOpen((prevState) => !prevState);
   };
+  const dropdown = (
+    <>
+      <li>
+        <Link to={"/login"} className="text-slate-950">
+          <AiOutlineLogin /> Login
+        </Link>
+      </li>
+      <li>
+        <Link to={"/login"} className="text-slate-950">
+          <RiLogoutCircleLine /> LogOut
+        </Link>
+      </li>
+      <li>
+        <Link to="/adminpage" className="text-slate-950">
+          <MdOutlineAdminPanelSettings /> Admin Page
+        </Link>
+      </li>
+      <li>
+        <Link to="/" className="text-slate-950">
+          <TbJewishStar /> WishList
+        </Link>
+      </li>
+      <li>
+        <Link to="/" className="text-slate-950">
+          <BsBag />
+          Cart
+        </Link>
+      </li>
+    </>
+  );
   const menu = (
     <>
       <li>
@@ -59,11 +92,25 @@ const Header = () => {
               <Drawer open={isOpen} onClose={toggleDrawer} direction="top">
                 <SearchDrawer toggleDrawer2={toggleDrawer}></SearchDrawer>
               </Drawer>
-              <BsSearch onClick={toggleDrawer} className="text-xl" />
+              <BsSearch
+                onClick={toggleDrawer}
+                className="text-xl  text-slate-950 hover:text-violet-700 transition duration-300"
+              />
               <div className="divider divider-horizontal"></div>
-              <AiOutlineUser className="text-xl" />
+              <div className="dropdown">
+                <label tabIndex={0}>
+                  <AiOutlineUser className="text-xl text-slate-950 hover:text-violet-700 transition duration-300" />
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 "
+                >
+                  {dropdown}
+                </ul>
+              </div>
+
               <div className="divider divider-horizontal"></div>
-              <BsBag className="text-xl" />
+              <BsBag className="text-xl text-slate-950 hover:text-violet-700 transition duration-300" />
             </div>
           </div>
         </div>

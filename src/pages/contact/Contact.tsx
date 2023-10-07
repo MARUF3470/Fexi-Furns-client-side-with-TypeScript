@@ -34,9 +34,11 @@ const Contact = () => {
       <div className="grid grid-cols-3 w-3/4 gap-5 mb-20 mx-auto">
         <div className="col-span-1 bg-violet-200 px-5 py-10">
           <h4 className="text-xl text-slate-950 font-semibold">Contact Info</h4>
-          <p className="text-sm text-slate-950">Phone: +8801786580192</p>
-          <p className="text-sm text-slate-950">Email: smmaruf25@gmail.com</p>
-          <p className="text-sm text-slate-950">
+          <p className="text-sm text-slate-950 mt-2">Phone: +8801786580192</p>
+          <p className="text-sm text-slate-950 mt-2">
+            Email: smmaruf25@gmail.com
+          </p>
+          <p className="text-sm text-slate-950 mt-2">
             Address: Station-road, Tongi, Gazipur, Bangladesh
           </p>
         </div>
