@@ -53,11 +53,9 @@ const AddProduct = () => {
     }
     postProduct(formData);
     if (isLoading) {
-      console.log("Loading", isLoading);
       return <Loading />;
     }
     if (isSuccess) {
-      console.log("sucess", isSuccess);
       reset();
       return;
     }
@@ -145,7 +143,7 @@ const AddProduct = () => {
             <option value="">Select One</option>
             <option value="Bedroom">Bedroom</option>
             <option value="Living">Living</option>
-            <option value="Dining">Dining</option>
+            <option value="Dinning">Dinning</option>
             <option value="Lounge">Lounge</option>
             <option value="Office Chair">Office Chair</option>
           </select>

@@ -113,7 +113,7 @@ const HomeProduct = () => {
           On Sale
         </button>
       </div>
-      <div>{content}</div>
+      <div className="grid grid-cols-4 w-3/4 mx-auto gap-4">{content}</div>
     </div>
   );
 };

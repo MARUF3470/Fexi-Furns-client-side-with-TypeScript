@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
 import { Link } from "react-router-dom";
 import { useGetProductQuery } from "../../features/api/products/productApi";
 import Loading from "../../component/reuseable/Loading/Loading";

@@ -6,10 +6,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./Home.css";
 import { EffectFade, Navigation, Autoplay, Pagination } from "swiper/modules";
-import HomeOptions from "./HomeOptions";
 import HomeProduct from "./HomeProduct";
 import HomeBanner from "./HomeBanner";
 import HomeNews from "./HomeNews";
+import Categories from "../categories/Categories";
 
 const Home = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -141,7 +141,7 @@ const Home = () => {
           <img src="https://furns-react.netlify.app/images/slider-image/slider-2-2.jpg" />
         </SwiperSlide>
       </Swiper>
-      <HomeOptions />
+      <Categories />
       <HomeProduct />
       <HomeBanner />
       <HomeNews />

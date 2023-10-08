@@ -10,10 +10,15 @@ type ToggleDrawerType = {
 type FormType = {
   keyword: string;
 };
+type StateType = {
+  api: object;
+  filter: object;
+};
 
 const SearchDrawer = ({ toggleDrawer2 }: ToggleDrawerType) => {
   const dispatch = useDispatch();
-  const filter = useSelector((state) => state.filter.keyword);
+  const filter = useSelector((state: StateType) => state.filter);
+  const { keyword } = filter;
   const { reset, handleSubmit, register } = useForm<FormType>();
   const handleformSubmit = (data: FormType) => {
     if (data.keyword.length) {
@@ -55,9 +60,9 @@ const SearchDrawer = ({ toggleDrawer2 }: ToggleDrawerType) => {
             <IoMdClose className="w-8 h-8"></IoMdClose>
           </motion.label>
         </div>
-        {filter.length ? (
-          <div className="flex justify-center items-center gap-3 bg-slate-200 w-16 mx-auto px-10 py-2">
-            <p>{filter.toUpperCase()}</p>
+        {keyword.length ? (
+          <div className="flex justify-center items-center gap-3 bg-slate-200 w-16 mx-auto px-20 py-2">
+            <p>{keyword.toUpperCase()}</p>
             <button
               onClick={() => dispatch(keywordSearch(""))}
               className="btn btn-circle btn-xs btn-outline"

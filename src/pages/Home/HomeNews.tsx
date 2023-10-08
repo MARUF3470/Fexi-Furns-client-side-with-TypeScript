@@ -1,5 +1,3 @@
-import React from "react";
-
 const HomeNews = () => {
   return (
     <div className="my-10">

@@ -9,6 +9,7 @@ import AdminLandingPage from "../pages/adminPage/AdminLandingPage";
 import DashBoard from "../pages/adminPage/DashBoard";
 import AddProduct from "../pages/adminPage/AddProduct";
 import AllProducts from "../pages/adminPage/AllProducts";
+import ProductsType from "../pages/productsData/ProductsType";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,12 @@ const router = createBrowserRouter([
       {
         path: "/adminpage",
         element: <AdminLandingPage />,
+      },
+      {
+        path: "/category/:id",
+        element: <ProductsType />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/products/${params.id}`),
       },
     ],
   },
