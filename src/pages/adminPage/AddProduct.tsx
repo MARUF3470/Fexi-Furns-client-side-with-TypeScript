@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useFieldArray, useForm } from "react-hook-form";
 import { usePostProductMutation } from "../../features/api/products/productApi";
 import Loading from "../../component/reuseable/Loading/Loading";
+import toast from "react-hot-toast";
 type MyValues = {
   name: string;
   description: string;
@@ -52,11 +53,12 @@ const AddProduct = () => {
       formData.append(`images`, pictures[i][0]);
     }
     postProduct(formData);
+    reset();
+    toast.success("Product Added");
     if (isLoading) {
       return <Loading />;
     }
     if (isSuccess) {
-      reset();
       return;
     }
     if (isError) {

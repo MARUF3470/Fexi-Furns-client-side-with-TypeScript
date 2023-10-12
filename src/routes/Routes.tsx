@@ -10,6 +10,8 @@ import DashBoard from "../pages/adminPage/DashBoard";
 import AddProduct from "../pages/adminPage/AddProduct";
 import AllProducts from "../pages/adminPage/AllProducts";
 import ProductsType from "../pages/productsData/ProductsType";
+import ProductDetails from "../pages/products/ProductDetails";
+import Wishlist from "../pages/wishlist/Wishlist";
 
 const router = createBrowserRouter([
   {
@@ -37,8 +39,16 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
+        path: "/wishlist",
+        element: <Wishlist />,
+      },
+      {
         path: "/adminpage",
         element: <AdminLandingPage />,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductDetails />,
       },
       {
         path: "/category/:id",

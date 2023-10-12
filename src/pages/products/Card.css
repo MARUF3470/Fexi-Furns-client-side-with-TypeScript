@@ -1,0 +1,45 @@
+.product-card {
+    position: relative;
+  }
+  
+  .add-to-cart-btn {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: bottom 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
+  .advertiseProduct:hover .product-card .add-to-cart-btn {
+    bottom: 0px;
+    opacity: 1;
+  }
+.mini-buttons{
+    position: absolute;
+    top: 10px;
+    right: 0;
+    transform: translateX(-30%);
+    opacity: 0;
+    transition: bottom 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
+
+  .product-card img {
+    display: block;
+    width: 100%;
+  }
+  .advertiseProduct:hover .product-card .mini-buttons{
+    opacity: 1;
+ 
+  }
+  .geek {
+    overflow: hidden;
+    margin: 0 auto;
+}
+  
+.geek img {
+    transition: 0.5s all ease-in-out;
+}
+  
+.advertiseProduct:hover .geek img {
+    transform: scale(1.1);
+}

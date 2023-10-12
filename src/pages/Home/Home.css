@@ -1,9 +1,3 @@
-#app { height: 100% }
-html,
-body {
-  position: relative;
-}
-
 .swiper-slide {
   background-position: center;
   background-size: cover;

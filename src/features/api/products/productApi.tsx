@@ -10,10 +10,19 @@ const productApi = apiSlice.injectEndpoints({
       }),
     }),
     getProduct: builder.query({
-      query: () => ({
-        url: "/products",
+      query: (query) => ({
+        url: `/products?page=${query.page}&size=${query.size}`,
+      }),
+    }),
+    getSingProduct: builder.query({
+      query: (id) => ({
+        url: `/product/${id}`,
       }),
     }),
   }),
 });
-export const { usePostProductMutation, useGetProductQuery } = productApi;
+export const {
+  usePostProductMutation,
+  useGetProductQuery,
+  useGetSingProductQuery,
+} = productApi;

@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
 import SearchDrawer from "../drawer/SearchDrawer";
+import Footer from "./Footer";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -34,7 +35,7 @@ const Header = () => {
         </Link>
       </li>
       <li>
-        <Link to="/" className="text-slate-950">
+        <Link to="/wishlist" className="text-slate-950">
           <TbJewishStar /> WishList
         </Link>
       </li>
@@ -48,29 +49,32 @@ const Header = () => {
   );
   const menu = (
     <>
-      <li>
+      <li className="relative group w-fit">
         <Link
           to="/"
           className="text-white hover:text-slate-950 transition duration-500"
         >
           Home
         </Link>
+        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-violet-950 transition-all duration-400 group-hover:w-full"></span>
       </li>
-      <li>
+      <li className="relative group w-fit">
         <Link
           to="/about"
           className="text-white hover:text-slate-950 transition duration-500"
         >
           About
         </Link>
+        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-violet-950 transition-all duration-400 group-hover:w-full"></span>
       </li>
-      <li>
+      <li className="relative group w-fit">
         <Link
           to="/contact"
-          className="text-white hover:text-slate-950 transition duration-500"
+          className="text-white hover:text-slate-950 transition duration-500 "
         >
           Contact
         </Link>
+        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-violet-950 transition-all duration-400 group-hover:w-full"></span>
       </li>
     </>
   );
@@ -137,6 +141,7 @@ const Header = () => {
           </div>
         </div>
         <Outlet />
+        <Footer />
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
