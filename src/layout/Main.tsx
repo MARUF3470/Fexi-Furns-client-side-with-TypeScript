@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Header from "../pages/sharedPages/Header";
 import { PiBagBold } from "react-icons/pi";
 import Drawer from "react-modern-drawer";

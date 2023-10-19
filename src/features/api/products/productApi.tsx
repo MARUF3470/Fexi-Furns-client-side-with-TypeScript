@@ -11,7 +11,7 @@ const productApi = apiSlice.injectEndpoints({
     }),
     getProduct: builder.query({
       query: (query) => ({
-        url: `/products?page=${query.page}&size=${query.size}`,
+        url: `/products?page=${query.page}&size=${query.size}&keyword=${query.keyword}`,
       }),
     }),
     getSingProduct: builder.query({

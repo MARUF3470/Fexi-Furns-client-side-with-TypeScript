@@ -11,86 +11,151 @@
 
 .transition-text {
     position: relative;
-    bottom: 200px; /* Start position */
+    bottom: 40%; /* Start position */
     animation: slideDown 1s ease-in-out;
   }
   
   @keyframes slideDown {
     0% {
         opacity: 0;
-      bottom: 200px;
+      bottom: 40%;
     }
     100% {
         opacity: 1;
-      bottom: 350px; /* End position */
+      bottom: 60%; /* End position */
     }
   }
   .text-fixed {
     position: relative;
-    bottom: 350px; /* Fixed position after animation */
+    bottom: 60%; /* Fixed position after animation */
   }
 
   .transition-text-sub {
     position: relative;
-    bottom: 150px; /* Start position */
+    bottom: 30%;/* Start position */
     animation: slideDown-sub 1.3s ease-in-out;
   }
   
   @keyframes slideDown-sub {
     0% {
         opacity: 0;
-      bottom: 150px;
+      bottom: 30%;
     }
     100% {
         opacity: 1;
-      bottom: 290px; /* End position */
+      bottom: 50%; /* End position */
     }
   }
   .text-fixed-sub {
     position: relative;
-    bottom: 290px; /* Fixed position after animation */
+    bottom: 50%; /* Fixed position after animation */
   }
   .transition-text-text {
     position: relative;
-    bottom: 90px; /* Start position */
+    bottom: 20%; /* Start position */
     animation: slideDown-text 1.6s ease-in-out;
   }
   
   @keyframes slideDown-text {
     0% {
         opacity: 0;
-      bottom: 90px;
+      bottom: 20%;
     }
     100% {
         opacity: 1;
-      bottom: 230px; /* End position */
+      bottom: 40%; /* End position */
     }
   }
   .text-fixed-text {
     position: relative;
-    bottom: 230px; /* Fixed position after animation */
+    bottom: 40%; /* Fixed position after animation */
   }
   .transition-btn {
     position: relative;
-    bottom: 60px; /* Start position */
+    bottom: 10%; /* Start position */
     animation: slideDown-btn 1.9s ease-in-out;
   }
   
   @keyframes slideDown-btn {
     0% {
         opacity: 0;
-      bottom: 60px;
+      bottom: 10%;
     }
     100% {
         opacity: 1;
-      bottom: 160px; /* End position */
+      bottom: 30%; /* End position */
     }
   }
   .btn-fixed {
     position: relative;
-    bottom: 160px; /* Fixed position after animation */
+    bottom: 30%; /* Fixed position after animation */
   }
 
   .noElement{
     visibility: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .transition-text {
+      position: relative;
+      bottom: 40%; /* Start position */
+      animation: slideDown 1s ease-in-out;
+    }
+    
+    @keyframes slideDown {
+      0% {
+          opacity: 0;
+        bottom: 40%;
+      }
+      100% {
+          opacity: 1;
+        bottom: 62%; /* End position */
+      }
+    }
+    .text-fixed {
+      position: relative;
+      bottom: 62%; /* Fixed position after animation */
+    }
+  
+    .transition-text-text {
+      position: relative;
+      bottom: 20%; /* Start position */
+      animation: slideDown-text 1.6s ease-in-out;
+    }
+    
+    @keyframes slideDown-text {
+      
+      
+      0% {
+          opacity: 0;
+        bottom: 20%;
+      }
+      100% {
+          opacity: 1;
+        bottom: 35%; /* End position */
+      }
+    }
+    .text-fixed-text {
+      position: relative;
+      bottom: 35%; /* Fixed position after animation */
+    }
+    .transition-btn {
+      position: relative;
+      bottom: 10%; /* Start position */
+      animation: slideDown-btn 1.9s ease-in-out;
+    }
+     @keyframes slideDown-btn {
+    0% {
+        opacity: 0;
+      bottom: 10%;
+    }
+    100% {
+        opacity: 1;
+      bottom: 16%; /* End position */
+    }
+  }
+  .btn-fixed {
+    position: relative;
+    bottom: 16%; /* Fixed position after animation */
+  }
   }

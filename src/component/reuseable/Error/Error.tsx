@@ -1,4 +1,3 @@
-import React from "react";
 import errorAnimation from "./animation_llku4we5.json";
 import Lottie from "lottie-react";
 

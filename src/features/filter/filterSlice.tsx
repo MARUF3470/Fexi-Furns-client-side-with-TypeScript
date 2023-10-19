@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const filterSlice = createSlice({
-  name: "filer",
+  name: "filter",
   initialState,
   reducers: {
     toggle: (state) => {

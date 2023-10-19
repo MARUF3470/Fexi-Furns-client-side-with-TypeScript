@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useContext, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 import { BsSearch, BsBag } from "react-icons/bs";
@@ -11,24 +12,35 @@ import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
 import SearchDrawer from "../drawer/SearchDrawer";
 import Footer from "./Footer";
+import { AuthContext } from "../../Authentication/AuthProvider";
 
 const Header = () => {
+  const { user, logout }: any = useContext(AuthContext);
+  console.log(user);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleDrawer = (): void => {
     setIsOpen((prevState) => !prevState);
   };
+  const handleLogout = () => {
+    logout()
+      .then(() => {})
+      .catch(() => {});
+  };
   const dropdown = (
     <>
-      <li>
-        <Link to={"/login"} className="text-slate-950">
-          <AiOutlineLogin /> Login
-        </Link>
-      </li>
-      <li>
-        <Link to={"/login"} className="text-slate-950">
-          <RiLogoutCircleLine /> LogOut
-        </Link>
-      </li>
+      {!user?.email ? (
+        <li>
+          <Link to={"/login"} className="text-slate-950">
+            <AiOutlineLogin /> Login
+          </Link>
+        </li>
+      ) : (
+        <li>
+          <button className="text-slate-950 font-medium" onClick={handleLogout}>
+            <RiLogoutCircleLine /> LogOut
+          </button>
+        </li>
+      )}
       <li>
         <Link to="/adminpage" className="text-slate-950">
           <MdOutlineAdminPanelSettings /> Admin Page
@@ -56,7 +68,7 @@ const Header = () => {
         >
           Home
         </Link>
-        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-violet-950 transition-all duration-400 group-hover:w-full"></span>
+        <span className="absolute hidden lg:block -bottom-1 left-0 w-0 h-0.5 bg-violet-950 transition-all duration-400 group-hover:w-full"></span>
       </li>
       <li className="relative group w-fit">
         <Link
@@ -65,7 +77,7 @@ const Header = () => {
         >
           About
         </Link>
-        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-violet-950 transition-all duration-400 group-hover:w-full"></span>
+        <span className="absolute hidden lg:block -bottom-1 left-0 w-0 h-0.5 bg-violet-950 transition-all duration-400 group-hover:w-full"></span>
       </li>
       <li className="relative group w-fit">
         <Link
@@ -74,12 +86,12 @@ const Header = () => {
         >
           Contact
         </Link>
-        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-violet-950 transition-all duration-400 group-hover:w-full"></span>
+        <span className="absolute hidden lg:block -bottom-1 left-0 w-0 h-0.5 bg-violet-950 transition-all duration-400 group-hover:w-full"></span>
       </li>
     </>
   );
   return (
-    <div className="drawer">
+    <div className="drawer block mx-auto w-[780px] lg:w-full">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         <div className="flex justify-around items-center py-5">
@@ -92,7 +104,7 @@ const Header = () => {
             <h1>FEXI_FURNS</h1>
           </div>
           <div>
-            <div className="flex w-full flex-row">
+            <div className="flex w-full items-center justify-center flex-row">
               <Drawer open={isOpen} onClose={toggleDrawer} direction="top">
                 <SearchDrawer toggleDrawer2={toggleDrawer}></SearchDrawer>
               </Drawer>
@@ -103,7 +115,15 @@ const Header = () => {
               <div className="divider divider-horizontal"></div>
               <div className="dropdown">
                 <label tabIndex={0}>
-                  <AiOutlineUser className="text-xl text-slate-950 hover:text-violet-700 transition duration-300" />
+                  {user?.email ? (
+                    <div className="avatar">
+                      <div className="w-8 rounded-full">
+                        <img src={user.photoURL} alt="User Profile Picture" />
+                      </div>
+                    </div>
+                  ) : (
+                    <AiOutlineUser className="text-xl text-slate-950 hover:text-violet-700 transition duration-300" />
+                  )}
                 </label>
                 <ul
                   tabIndex={0}

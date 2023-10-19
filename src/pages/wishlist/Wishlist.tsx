@@ -18,10 +18,12 @@ const Wishlist = () => {
   const query = {
     page: 0,
     size: 0,
+    keyword: "",
   };
   const { data, isLoading, refetch } = useGetProductQuery(query, {
     refetchOnMountOrArgChange: true,
   });
+  console.log(data);
   if (isLoading) {
     return <Loading />;
   }
@@ -66,7 +68,7 @@ const Wishlist = () => {
                   <ProductListUI
                     key={product._id}
                     product={product}
-                    handledeleteFormWishlist={handledeleteFormWishlist}
+                    handledelete={handledeleteFormWishlist}
                   />
                 ))}
               </tbody>

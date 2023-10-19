@@ -4,10 +4,10 @@ import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
-    <>
+    <div>
       <RouterProvider router={router} />
       <Toaster position="top-center" reverseOrder={false} />
-    </>
+    </div>
   );
 }
 

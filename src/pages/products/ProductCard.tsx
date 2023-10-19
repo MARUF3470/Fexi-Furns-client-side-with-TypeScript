@@ -21,18 +21,7 @@ const ProductCard = ({ product }: any) => {
   };
   return (
     <div>
-      {/* <h1>{product.name}</h1>
-      <div>
-        {product?.images?.map((image: ImageType) => (
-          <img
-            key={image._id}
-            src={`http://localhost:5000/uploads/${image.filename}`}
-            alt={image.filename}
-            style={{ maxWidth: "200px", maxHeight: "200px" }}
-          />
-        ))}
-      </div> */}
-      <div className="advertiseProduct shadow-md">
+      <div className="advertiseProduct h-full shadow-md">
         <div className="product-card geek">
           <img
             src={`http://localhost:5000/uploads/${product.images[0].filename}`}

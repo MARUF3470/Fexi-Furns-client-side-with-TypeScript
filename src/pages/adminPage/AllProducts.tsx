@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useGetProductQuery } from "../../features/api/products/productApi";
 import Loading from "../../component/reuseable/Loading/Loading";
 import Error from "../../component/reuseable/Error/Error";
+import ProductListUI from "../sharedPages/ProductListUI";
 type ProductType = {
   _id: string;
   name: string;
@@ -12,13 +13,23 @@ type ProductType = {
 };
 
 const AllProducts = () => {
-  const { data, isError, isLoading } = useGetProductQuery(null);
+  const { pathname } = useLocation();
+  const query = {
+    size: 0,
+    page: 0,
+    keyword: "",
+  };
+  const { data, isError, isLoading } = useGetProductQuery(query);
+  console.log(data);
   if (isLoading) {
     return <Loading />;
   }
   if (isError) {
     return <Error />;
   }
+  const handleDelete = (id: string) => {
+    console.log(id);
+  };
   return (
     <div>
       <div className="text-center bg-slate-100 py-14">
@@ -40,25 +51,36 @@ const AllProducts = () => {
           / PRODUCT LIST
         </p>
       </div>
-      <ul>
-        {data?.map((product: ProductType) => (
-          <li key={product._id}>
-            <h2>{product.name}</h2>
-            <p>{product.description}</p>
-            <p>Price: ${product.price}</p>
-            <div>
-              {product?.images?.map((image: any) => (
-                <img
-                  key={image._id}
-                  src={`http://localhost:5000/uploads/${image.filename}`}
-                  alt={image.filename}
-                  style={{ maxWidth: "200px", maxHeight: "200px" }}
-                />
-              ))}
-            </div>
-          </li>
-        ))}
-      </ul>
+      <table className="table w-full">
+        <thead>
+          <tr>
+            <th className="rounded-none border bg-transparent">Image</th>
+            <th className="border bg-transparent">Product</th>
+            {pathname.includes("cart") && (
+              <th className="rounded-none border bg-transparent">Quantity</th>
+            )}
+            {pathname.includes("allproducts") && (
+              <th className="rounded-none border bg-transparent">Quantity</th>
+            )}
+            {pathname.includes("wishlist") && (
+              <th className="rounded-none border bg-transparent">
+                Add To Cart
+              </th>
+            )}
+            <th className="border bg-transparent">Price</th>
+            <th className="rounded-none border bg-transparent">Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data?.products?.map((product: ProductType) => (
+            <ProductListUI
+              handledelete={handleDelete}
+              key={product._id}
+              product={product}
+            />
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

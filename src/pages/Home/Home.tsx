@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -23,7 +23,7 @@ const Home = () => {
     setRemount(true);
   }, []);
   return (
-    <>
+    <div>
       <Swiper
         autoplay={{
           delay: 5500,
@@ -34,7 +34,7 @@ const Home = () => {
         navigation={true}
         pagination={true}
         modules={[EffectFade, Navigation, Pagination, Autoplay]}
-        className="mySwiper w-[1349px] h-[550px] z-0"
+        className="mySwiper w-full h-[200px] lg:h-[550px] z-0"
       >
         <SwiperSlide>
           <div className=" text-center ">
@@ -44,7 +44,7 @@ const Home = () => {
                   loading || remount
                     ? "transition-text text-center text-fixed"
                     : "noElement"
-                }  w-full  font-semibold text-xl text-white`}
+                }  w-full font-light lg:font-semibold text-xs lg:text-xl text-white`}
               >
                 New Products
               </h3>
@@ -55,7 +55,7 @@ const Home = () => {
                   loading || remount
                     ? "transition-text-sub text-fixed-sub"
                     : "noElement"
-                } w-full text-center font-bold text-5xl text-white`}
+                } w-full text-center font-medium lg:font-bold text-lg lg:text-5xl text-white`}
               >
                 Flexible Chair
               </h2>
@@ -65,7 +65,7 @@ const Home = () => {
                 loading || remount
                   ? "transition-text-text text-fixed-text"
                   : "noElement"
-              } w-full text-center text-white text-sm `}
+              } w-full text-center text-white font-light lg:font-normal text-xs lg:text-sm `}
               data-swiper-parallax={-100}
             >
               <p>
@@ -77,7 +77,7 @@ const Home = () => {
           </div>
           <div className="flex justify-center items-center">
             <button
-              className={`hover:bg-black hover:border-black transition duration-500 border border-purple-700 px-8 py-3 text-white bg-purple-700 rounded-none text-xs  absolute ${
+              className={`hover:bg-black hover:border-black transition duration-500 border border-purple-700 px-4 py-2 lg:px-8 lg:py-3 text-white bg-purple-700 rounded-none text-xs  absolute ${
                 loading || remount
                   ? "transition-btn slideDown-btn btn-fixed"
                   : "noElement"
@@ -96,7 +96,7 @@ const Home = () => {
                   loading || remount
                     ? "transition-text text-center text-fixed"
                     : "noElement"
-                }  w-full  font-semibold text-xl text-white`}
+                }  w-full font-light lg:font-semibold text-xs lg:text-xl text-white`}
               >
                 Best Seller
               </h3>
@@ -107,7 +107,7 @@ const Home = () => {
                   loading || remount
                     ? "transition-text-sub text-fixed-sub"
                     : "noElement"
-                } w-full text-center font-bold text-5xl text-white`}
+                } w-full text-center font-medium lg:font-bold text-lg lg:text-5xl text-white`}
               >
                 Creative
               </h2>
@@ -117,7 +117,7 @@ const Home = () => {
                 loading || remount
                   ? "transition-text-text text-fixed-text"
                   : "noElement"
-              } w-full text-center text-white text-sm `}
+              } w-full text-center text-white font-light lg:font-normal text-xs lg:text-sm `}
               data-swiper-parallax={-100}
             >
               <p>
@@ -128,7 +128,7 @@ const Home = () => {
             </div>
             <div className="flex justify-center items-center">
               <button
-                className={`hover:bg-black hover:border-black transition duration-500 border border-purple-700 px-8 py-3 text-white bg-purple-700 rounded-none text-xs  absolute ${
+                className={`hover:bg-black hover:border-black transition duration-500 border border-purple-700 px-4 py-2 lg:px-8 lg:py-3 text-white bg-purple-700 rounded-none text-xs  absolute ${
                   loading || remount
                     ? "transition-btn slideDown-btn btn-fixed"
                     : "noElement"
@@ -145,7 +145,7 @@ const Home = () => {
       <HomeProduct />
       <HomeBanner />
       <HomeNews />
-    </>
+    </div>
   );
 };
 

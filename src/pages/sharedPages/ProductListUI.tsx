@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { useLocation } from "react-router-dom";
-
-const ProductListUI = ({ product, handledeleteFormWishlist }) => {
+const ProductListUI = ({ product, handledelete }: any) => {
   const { pathname } = useLocation();
   return (
     <tr className="h-40 w-full">
@@ -19,7 +19,7 @@ const ProductListUI = ({ product, handledeleteFormWishlist }) => {
         <br />
         <span className="badge badge-ghost badge-sm">{product?.type}</span>
       </td>
-      {pathname.includes("cart") ? (
+      {pathname.includes("cart") && (
         <th className="border">
           <div className="border p-3 flex">
             <button>-</button>
@@ -29,7 +29,13 @@ const ProductListUI = ({ product, handledeleteFormWishlist }) => {
             <button>+</button>
           </div>
         </th>
-      ) : (
+      )}{" "}
+      {pathname.includes("allproducts") && (
+        <th className="rounded-none border bg-transparent text-center">
+          {product.quantity}
+        </th>
+      )}
+      {pathname.includes("wishlist") && (
         <th className="border ">
           <button className="w-full bg-black text-white hover:bg-violet-600 text-xs py-2">
             ADD TO CART
@@ -39,7 +45,7 @@ const ProductListUI = ({ product, handledeleteFormWishlist }) => {
       <td className="border">{product.price}$</td>
       <th className="border">
         <button
-          onClick={() => handledeleteFormWishlist(product._id)}
+          onClick={() => handledelete(product._id)}
           className="btn btn-circle btn-outline"
         >
           <svg

@@ -22,7 +22,7 @@ const ProductDetails = () => {
   return (
     <div>
       <div className="text-center bg-slate-100 py-14">
-        <h1 className="text-xl font-semibold text-slate-950">CONTACT US</h1>
+        <h1 className="text-xl font-semibold text-slate-950">DETAILS</h1>
         <p className="text-xs mt-3">
           <Link
             to="/"

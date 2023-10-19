@@ -12,6 +12,8 @@ import AllProducts from "../pages/adminPage/AllProducts";
 import ProductsType from "../pages/productsData/ProductsType";
 import ProductDetails from "../pages/products/ProductDetails";
 import Wishlist from "../pages/wishlist/Wishlist";
+import PrivateRoute from "./PrivateRoute";
+import AdminPrivateRoute from "./AdminPrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -40,15 +42,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/wishlist",
-        element: <Wishlist />,
+        element: (
+          <PrivateRoute>
+            <Wishlist />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/adminpage",
-        element: <AdminLandingPage />,
+        element: (
+          <AdminPrivateRoute>
+            <AdminLandingPage />
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "/products/:id",
-        element: <ProductDetails />,
+        element: (
+          <PrivateRoute>
+            <ProductDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/category/:id",
@@ -60,7 +74,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashBoard />,
+    element: (
+      <AdminPrivateRoute>
+        <DashBoard />
+      </AdminPrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard",
