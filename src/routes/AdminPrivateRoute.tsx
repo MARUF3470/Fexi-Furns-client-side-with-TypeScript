@@ -10,16 +10,15 @@ interface AuthProviderProps {
 const AdminPrivateRoute: React.FC<AuthProviderProps> = ({ children }) => {
   const location = useLocation();
   const { user, loading }: any = useContext(AuthContext);
-  console.log(user?.email);
   const { data, isLoading } = useGetSingleUserQuery(user?.email);
   if (loading) {
     return <Loading />;
   }
-  if (data?.role === "admin") {
-    return children;
-  }
   if (isLoading) {
     return <Loading />;
+  }
+  if (data?.role === "admin") {
+    return children;
   }
   return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
 };

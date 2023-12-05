@@ -4,23 +4,27 @@ import { BsSearch } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import { keywordSearch } from "../../features/filter/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
+
 type ToggleDrawerType = {
   toggleDrawer2: () => void;
 };
-type FormType = {
+type FilterType = {
+  stock: boolean;
+  categories: string[];
   keyword: string;
 };
 type StateType = {
   api: object;
-  filter: object;
+  filter: FilterType;
 };
 
 const SearchDrawer = ({ toggleDrawer2 }: ToggleDrawerType) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<Dispatch>();
   const filter = useSelector((state: StateType) => state.filter);
   const { keyword } = filter;
-  const { reset, handleSubmit, register } = useForm<FormType>();
-  const handleformSubmit = (data: FormType) => {
+  const { reset, handleSubmit, register } = useForm<FilterType>();
+  const handleformSubmit = (data: FilterType) => {
     if (data.keyword.length) {
       dispatch(keywordSearch(data.keyword));
       reset();

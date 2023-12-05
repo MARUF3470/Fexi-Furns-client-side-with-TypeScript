@@ -1,8 +1,15 @@
-import { useLocation } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "../../component/reuseable/Loading/Loading";
-import { useGetProductQuery } from "../../features/api/products/productApi";
+import {
+  useGetCartPItemsQuery,
+  useGetProductQuery,
+  usePostCartItemMutation,
+} from "../../features/api/products/productApi";
 import ProductListUI from "../sharedPages/ProductListUI";
 import toast from "react-hot-toast";
+import { useContext } from "react";
+import { AuthContext } from "../../Authentication/AuthProvider";
 type ProductType = {
   _id: string;
   name: string;
@@ -14,6 +21,9 @@ type ProductType = {
   pictures: string;
 };
 const Wishlist = () => {
+  const navigate = useNavigate();
+  const { user }: any = useContext(AuthContext);
+  const { data: userCartProduct = [] } = useGetCartPItemsQuery(user?.email);
   const { pathname } = useLocation();
   const query = {
     page: 0,
@@ -23,12 +33,33 @@ const Wishlist = () => {
   const { data, isLoading, refetch } = useGetProductQuery(query, {
     refetchOnMountOrArgChange: true,
   });
-  console.log(data);
+  const [addToCart] = usePostCartItemMutation();
+
+  const handleAddToCart = (id: string) => {
+    const cartData = {
+      id,
+      email: user.email,
+    };
+    if (user?.email) {
+      const allreadyAdded = userCartProduct.find(
+        (item: { _id: string; id: string }) => item.id === id
+      );
+      if (allreadyAdded) {
+        return toast.error("This product is already added to your cart");
+      } else {
+        refetch();
+        addToCart(cartData);
+        return toast.success("This product is added to your cart");
+      }
+    } else {
+      toast.error("You need to login first to add product to your cart");
+      return navigate("/login");
+    }
+  };
   if (isLoading) {
     return <Loading />;
   }
   const ids = localStorage.getItem("wishlist");
-  console.log(ids);
 
   if (ids) {
     const wishlistproducts = data?.products.filter((product: ProductType) =>
@@ -69,6 +100,7 @@ const Wishlist = () => {
                     key={product._id}
                     product={product}
                     handledelete={handledeleteFormWishlist}
+                    handleAddToCart={handleAddToCart}
                   />
                 ))}
               </tbody>

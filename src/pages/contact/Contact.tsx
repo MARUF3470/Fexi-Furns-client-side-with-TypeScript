@@ -1,7 +1,36 @@
-import React from "react";
+import emailjs from "@emailjs/browser";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-
+type MyValues = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
 const Contact = () => {
+  const { handleSubmit, register, reset } = useForm<MyValues>({
+    defaultValues: {},
+  });
+  const handleFormSubmit = (data: MyValues) => {
+    emailjs
+      .send(
+        import.meta.env.VITE_EMAIL_SERVICE_ID,
+        import.meta.env.VITE_EMAIL_TEMPLATE_ID,
+        data,
+        import.meta.env.VITE_EMAIL_PUBLIC_KEY
+      )
+      .then((res) => {
+        if (res.status) {
+          reset();
+          toast.success("Email has been sent to the authority");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Can not sent mail at this moment");
+      });
+  };
   return (
     <div>
       <div className="text-center bg-slate-100 py-14">
@@ -43,12 +72,17 @@ const Contact = () => {
           </p>
         </div>
         <div className="col-span-2 bg-violet-200 px-5 py-10">
-          <div className="grid grid-cols-2 gap-5">
+          <form
+            onSubmit={handleSubmit(handleFormSubmit)}
+            className="grid grid-cols-2 gap-5"
+          >
             <label htmlFor="Name" className="text-xs">
               Name <br />
               <input
                 type="text"
                 placeholder="Enter Your Name"
+                required
+                {...register("name", { required: "Provide your name" })}
                 className="input text-xs input-bordered w-full py-2 px-4 rounded-sm mt-3 focus:outline-none focus:border-violet-700 transition duration-500 flex-grow"
               />
             </label>
@@ -56,6 +90,8 @@ const Contact = () => {
               Email <br />
               <input
                 type="text"
+                required
+                {...register("email", { required: "Provide your email" })}
                 placeholder="Enter Your Email"
                 className="input text-xs input-bordered w-full py-2 px-4 rounded-sm mt-3 focus:outline-none focus:border-violet-700 transition duration-500 flex-grow"
               />
@@ -64,6 +100,8 @@ const Contact = () => {
               Subject <br />
               <input
                 type="text"
+                required
+                {...register("subject", { required: "what is your query" })}
                 placeholder="Subject"
                 className="input text-xs input-bordered w-full py-2 px-4 rounded-sm mt-3 focus:outline-none focus:border-violet-700 transition duration-500 flex-grow"
               />
@@ -71,11 +109,18 @@ const Contact = () => {
             <label htmlFor="Message" className="text-xs col-span-2">
               Message <br />
               <textarea
+                required
+                {...register("message", { required: "Write about your query" })}
                 placeholder="Message"
                 className="input text-xs input-bordered w-full py-2 h-36 px-4 rounded-sm mt-3 focus:outline-none focus:border-violet-700 transition duration-500 flex-grow"
               />
             </label>
-          </div>
+            <input
+              type="submit"
+              value="SUBMIT"
+              className="btn rounded-sm bg-violet-700 text-white text-sm hover:bg-black"
+            />
+          </form>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { useGetProductQuery } from "../../features/api/products/productApi";
 import Loading from "../../component/reuseable/Loading/Loading";
 import Error from "../../component/reuseable/Error/Error";
 import ProductListUI from "../sharedPages/ProductListUI";
+
 type ProductType = {
   _id: string;
   name: string;
@@ -11,7 +12,6 @@ type ProductType = {
   price: number;
   images: object[];
 };
-
 const AllProducts = () => {
   const { pathname } = useLocation();
   const query = {
@@ -19,17 +19,17 @@ const AllProducts = () => {
     page: 0,
     keyword: "",
   };
-  const { data, isError, isLoading } = useGetProductQuery(query);
-  console.log(data);
+  const { data, isError, isLoading } = useGetProductQuery(query, {
+    refetchOnMountOrArgChange: true,
+  });
+
   if (isLoading) {
     return <Loading />;
   }
   if (isError) {
     return <Error />;
   }
-  const handleDelete = (id: string) => {
-    console.log(id);
-  };
+
   return (
     <div>
       <div className="text-center bg-slate-100 py-14">
@@ -73,11 +73,7 @@ const AllProducts = () => {
         </thead>
         <tbody>
           {data?.products?.map((product: ProductType) => (
-            <ProductListUI
-              handledelete={handleDelete}
-              key={product._id}
-              product={product}
-            />
+            <ProductListUI key={product._id} product={product} />
           ))}
         </tbody>
       </table>

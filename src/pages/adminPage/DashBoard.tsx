@@ -17,7 +17,7 @@ const DashBoard = () => {
               </Link>
             </li>
             <li className="hover-bordered">
-              <Link to="/dashboard" className="w-full">
+              <Link to="/dashboard/allusers" className="w-full">
                 Users
               </Link>
             </li>

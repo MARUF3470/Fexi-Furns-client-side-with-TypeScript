@@ -42,7 +42,7 @@ const Login = () => {
   return (
     <div>
       <div className="text-center bg-slate-100 py-14">
-        <h1 className="text-xl font-semibold text-slate-950">CONTACT US</h1>
+        <h1 className="text-xl font-semibold text-slate-950">SIGN-IN</h1>
         <p className="text-xs mt-3">
           <Link
             to="/"
@@ -50,7 +50,7 @@ const Login = () => {
           >
             HOME<span> </span>
           </Link>
-          / LOGIN
+          / SIGN-IN
         </p>
       </div>
       <div>

@@ -27,10 +27,10 @@ const AddProduct = () => {
     defaultValues: {},
   });
   const {
-    fields: skillFields,
+    fields: imageField,
     append: pictureAppend,
     remove: pictureRemove,
-  } = useFieldArray({ control, name: "pictures" });
+  } = useFieldArray({ control, name: "pictures" as const });
 
   const handleProductUpload = async ({
     name,
@@ -49,7 +49,6 @@ const AddProduct = () => {
     formData.append("category", category);
     formData.append("type", type);
     for (let i = 0; i < pictures.length; i++) {
-      console.log(pictures[i][0]);
       formData.append(`images`, pictures[i][0]);
     }
     postProduct(formData);
@@ -69,7 +68,7 @@ const AddProduct = () => {
   return (
     <div>
       <div className="text-center bg-slate-100 py-14">
-        <h1 className="text-xl font-semibold text-slate-950">CONTACT US</h1>
+        <h1 className="text-xl font-semibold text-slate-950">ADD PRODUCT</h1>
         <p className="text-xs mt-3">
           <Link
             to="/"
@@ -178,13 +177,13 @@ const AddProduct = () => {
           </label>
           <div>
             <div>
-              {skillFields.map((item, index) => {
+              {imageField.map((item, index) => {
                 return (
                   <div key={item.id} className="flex items-center gap-2">
                     <input
                       className="mt-3 text-xs"
                       type="file"
-                      {...register(`pictures[${index}]`, {
+                      {...register(`pictures.${index}`, {
                         required: "Upload Furniture Pictures",
                       })}
                     />
@@ -208,7 +207,7 @@ const AddProduct = () => {
             <div>
               <button
                 type="button"
-                onClick={() => pictureAppend("")}
+                onClick={() => pictureAppend([{}])}
                 className="btn btn-xs rounded-sm mt-5"
               >
                 Add picture *

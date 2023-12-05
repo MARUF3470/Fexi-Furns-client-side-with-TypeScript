@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from "react-redux";
 import { useGetProductQuery } from "../../features/api/products/productApi";
 import ProductCard from "../products/ProductCard";
@@ -22,8 +23,8 @@ type QueryType = {
 
 const HomeProduct = () => {
   const [page, setPage] = useState<number>(0);
-  const [size, setSize] = useState<string>("1");
-  const filter = useSelector((state) => state.filter);
+  const [size, setSize] = useState<string>("5");
+  const filter = useSelector((state: any) => state.filter);
   const { stock, categories, keyword } = filter;
   const query: QueryType = {
     page,
@@ -122,7 +123,7 @@ const HomeProduct = () => {
       <div className="grid grid-cols-2 lg:grid-cols-4 w-3/4 mx-auto gap-4">
         {content}
       </div>
-      <div className="w-3/4 mx-auto my-10 flex flex-wrap">
+      <div className="w-3/4 mx-auto my-10 flex items-center gap-3 flex-wrap">
         <div>
           {buttons.map((buttonNumber) => (
             <button
@@ -140,10 +141,12 @@ const HomeProduct = () => {
           <span>Size:</span>
           <select
             onChange={(e) => setSize(e.target.value)}
-            className="ml-3 select select-primary rounded-sm"
+            className="input text-xs input-bordered ml-2 py-2 px-4 rounded-sm focus:outline-none focus:border-violet-700 transition duration-500 "
           >
             <option value="1">1</option>
-            <option value="5">5</option>
+            <option value="5" selected>
+              5
+            </option>
             <option value="10">10</option>
             <option value="20">20</option>
           </select>

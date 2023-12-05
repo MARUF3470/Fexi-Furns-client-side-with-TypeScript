@@ -8,19 +8,32 @@ const usersApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["users"],
     }),
     getUsers: builder.query({
       query: () => ({
-        url: `/users`,
+        url: "/users",
       }),
+      providesTags: ["users"],
     }),
     getSingleUser: builder.query({
       query: (data) => ({
         url: `/user/${data}`,
       }),
     }),
+    deleteUser: builder.mutation({
+      query: (email) => ({
+        url: `/user/${email}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["users"],
+    }),
   }),
 });
 
-export const { usePostUserMutation, useGetUsersQuery, useGetSingleUserQuery } =
-  usersApi;
+export const {
+  usePostUserMutation,
+  useGetUsersQuery,
+  useGetSingleUserQuery,
+  useDeleteUserMutation,
+} = usersApi;

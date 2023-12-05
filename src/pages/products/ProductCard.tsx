@@ -1,13 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BsEye, BsHeart, BsLink } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Card.css";
 import toast from "react-hot-toast";
+import {
+  useGetCartPItemsQuery,
+  usePostCartItemMutation,
+} from "../../features/api/products/productApi";
+import { AuthContext } from "../../Authentication/AuthProvider";
 const ProductCard = ({ product }: any) => {
+  const navigate = useNavigate();
+  const { user }: any = useContext(AuthContext);
+  const [addToCart] = usePostCartItemMutation();
+  const { data, refetch } = useGetCartPItemsQuery(user?.email);
   const handleAddProductWishlist = (id: string) => {
     const wishlistData = localStorage.getItem("wishlist");
     if (wishlistData) {
-      // Parse the JSON string into an array
       const retrievedWishlist = JSON.parse(wishlistData);
       retrievedWishlist.push(id);
       localStorage.setItem("wishlist", JSON.stringify(retrievedWishlist));
@@ -19,16 +28,40 @@ const ProductCard = ({ product }: any) => {
       toast.success("Product added to your wishlist");
     }
   };
+  const handleAddToCart = (id: string) => {
+    const cartData = {
+      id,
+      email: user.email,
+    };
+    if (user?.email) {
+      const allreadyAdded = data.find(
+        (item: { _id: string; id: string }) => item.id === id
+      );
+      if (allreadyAdded) {
+        return toast.error("This product is already added to your cart");
+      } else {
+        refetch();
+        addToCart(cartData);
+        return toast.success("This product is added to your cart");
+      }
+    } else {
+      toast.error("You need to login first to add product to your cart");
+      return navigate("/login");
+    }
+  };
   return (
     <div>
       <div className="advertiseProduct h-full shadow-md">
         <div className="product-card geek">
           <img
-            src={`http://localhost:5000/uploads/${product.images[0].filename}`}
+            src={`https://fexi-furn-api.onrender.com/uploads/${product.images[0].filename}`}
             alt="Product"
             className="h-48"
           />
-          <button className="add-to-cart-btn text-xs bg-white text-zinc-950 w-3/4 mx-auto h-6 mb-2 hover:bg-zinc-950 hover:text-white transition duration-300">
+          <button
+            onClick={() => handleAddToCart(product?._id)}
+            className="add-to-cart-btn text-xs bg-white text-zinc-950 w-3/4 mx-auto h-6 mb-2 hover:bg-zinc-950 hover:text-white transition duration-300"
+          >
             Add to Cart
           </button>
           <div className="flex flex-col gap-1 mini-buttons">

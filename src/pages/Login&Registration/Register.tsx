@@ -21,7 +21,7 @@ const Register = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const { registration, updateUser }: any = useContext(AuthContext);
   const {
     handleSubmit,
@@ -39,11 +39,11 @@ const Register = () => {
     img,
   }: MyValues) => {
     if (password !== cpassword) {
-      return setError(true);
+      return;
     }
-    setError(false);
+    setError("");
     const image = img[0];
-    console.log(image);
+
     const formData = new FormData();
     formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${
@@ -55,39 +55,43 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((imgData) => {
-        console.log(imgData);
         if (imgData.success) {
-          registration(email, password).then((res: any) => {
-            console.log(res.user);
-            toast.success("User registration done");
-            const profile = {
-              displayName: name,
-              photoURL: imgData.data.url,
-            };
-            updateUserInfo(profile);
-            reset();
-            const user = {
-              name,
-              userImage: imgData.data.url,
-              email,
-              role: "customer",
-            };
-            postUser(user);
-          });
+          registration(email, password)
+            .then((res: any) => {
+              console.log(res);
+              toast.success("User registration done");
+              const profile = {
+                displayName: name,
+                photoURL: imgData.data.url,
+              };
+              reset();
+              const user = {
+                name,
+                userImage: imgData.data.url,
+                email,
+                role: "customer",
+              };
+              updateUserInfo(user, profile);
+            })
+            .catch((err: any) => {
+              setError(err.message);
+            });
         }
       })
       .catch((err) => {
         console.log(err);
-        reset();
-        setError(err.message);
       });
   };
-  const updateUserInfo = (profile: {
-    displayName: string;
-    photoURL: string;
-  }) => {
+  const updateUserInfo = (
+    user: { name: string; userImage: string; email: string; role: string },
+    profile: {
+      displayName: string;
+      photoURL: string;
+    }
+  ) => {
     updateUser(profile)
       .then(() => {
+        postUser(user);
         navigate(from, { replace: true });
       })
       .catch((err: any) => console.log(err));
@@ -188,6 +192,7 @@ const Register = () => {
             value="REGISTRATION"
             className="btn rounded-sm mt-4 bg-violet-700 text-white text-sm w-full "
           />
+          {error && <p className="text-red-500">{error.split(" ")[2]}</p>}
           <div className="grid grid-cols-2 gap-3 mt-4">
             <Link
               to={"/login"}
@@ -198,7 +203,6 @@ const Register = () => {
             <button className="btn text-xs w-full rounded-sm bg-slate-950 text-white hover:text-red-400">
               <FcGoogle className="text-xl" /> GOOGLE LOGIN
             </button>
-            {error && <p className="text-red-500">Recheck Your Password</p>}
           </div>
         </form>
       </div>

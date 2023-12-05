@@ -14,7 +14,9 @@ import ProductDetails from "../pages/products/ProductDetails";
 import Wishlist from "../pages/wishlist/Wishlist";
 import PrivateRoute from "./PrivateRoute";
 import AdminPrivateRoute from "./AdminPrivateRoute";
-
+import CartItems from "../pages/Cart/CartItems";
+import AllUsers from "../pages/adminPage/AllUsers";
+import Payment from "../pages/Cart/Payment";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -42,9 +44,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/wishlist",
+        element: <Wishlist />,
+      },
+      {
+        path: "/cartItems",
         element: (
           <PrivateRoute>
-            <Wishlist />
+            <CartItems />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/payment/:id",
+        element: (
+          <PrivateRoute>
+            <Payment />
           </PrivateRoute>
         ),
       },
@@ -68,7 +82,7 @@ const router = createBrowserRouter([
         path: "/category/:id",
         element: <ProductsType />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products/${params.id}`),
+          fetch(`https://fexi-furn-api.onrender.com/products/${params.id}`),
       },
     ],
   },
@@ -87,6 +101,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/allproducts",
         element: <AllProducts />,
+      },
+      {
+        path: "/dashboard/allusers",
+        element: <AllUsers />,
       },
     ],
   },

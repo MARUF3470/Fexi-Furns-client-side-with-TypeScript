@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 import { BsSearch, BsBag } from "react-icons/bs";
@@ -16,7 +16,7 @@ import { AuthContext } from "../../Authentication/AuthProvider";
 
 const Header = () => {
   const { user, logout }: any = useContext(AuthContext);
-  console.log(user);
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleDrawer = (): void => {
     setIsOpen((prevState) => !prevState);
@@ -52,7 +52,7 @@ const Header = () => {
         </Link>
       </li>
       <li>
-        <Link to="/" className="text-slate-950">
+        <Link to="/cartItems" className="text-slate-950">
           <BsBag />
           Cart
         </Link>
@@ -64,7 +64,7 @@ const Header = () => {
       <li className="relative group w-fit">
         <Link
           to="/"
-          className="text-white hover:text-slate-950 transition duration-500"
+          className="text-black lg:text-white hover:text-slate-950 transition duration-500"
         >
           Home
         </Link>
@@ -73,7 +73,7 @@ const Header = () => {
       <li className="relative group w-fit">
         <Link
           to="/about"
-          className="text-white hover:text-slate-950 transition duration-500"
+          className="text-black lg:text-white hover:text-slate-950 transition duration-500"
         >
           About
         </Link>
@@ -82,7 +82,7 @@ const Header = () => {
       <li className="relative group w-fit">
         <Link
           to="/contact"
-          className="text-white hover:text-slate-950 transition duration-500 "
+          className="text-black lg:text-white hover:text-slate-950 transition duration-500 "
         >
           Contact
         </Link>
@@ -118,7 +118,7 @@ const Header = () => {
                   {user?.email ? (
                     <div className="avatar">
                       <div className="w-8 rounded-full">
-                        <img src={user.photoURL} alt="User Profile Picture" />
+                        <img src={user?.photoURL} alt="user" />
                       </div>
                     </div>
                   ) : (
@@ -134,7 +134,9 @@ const Header = () => {
               </div>
 
               <div className="divider divider-horizontal"></div>
-              <BsBag className="text-xl text-slate-950 hover:text-violet-700 transition duration-300" />
+              <Link to="/cartItems">
+                <BsBag className="text-xl text-slate-950 hover:text-violet-700 transition duration-300" />
+              </Link>
             </div>
           </div>
         </div>

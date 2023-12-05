@@ -1,43 +1,7 @@
-import { PiOfficeChair, PiArmchair } from "react-icons/pi";
-
-import { GiRockingChair } from "react-icons/gi";
-import { BsInboxes } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import "./HomeOption.css";
-import bedImg from "../../assets/75.png";
-import chairImg from "../../assets/75 (1).png";
-import dinnigImg from "../../assets/75 (2).png";
-import loungeImg from "../../assets/75 (3).png";
-import officeChairImg from "../../assets/75 (4).png";
 
 const HomeOptions = () => {
-  const categories = [
-    {
-      id: 1,
-      name: "Bedroom",
-      img: bedImg,
-    },
-    {
-      id: 2,
-      name: "Chair",
-      img: chairImg,
-    },
-    {
-      id: 1,
-      name: "Dinning",
-      img: dinnigImg,
-    },
-    {
-      id: 1,
-      name: "Lounge",
-      img: loungeImg,
-    },
-    {
-      id: 1,
-      name: "Office Chair",
-      img: officeChairImg,
-    },
-  ];
   return (
     <div className="grid grid-cols-5 gap-12 mx-auto mt-20">
       <Link

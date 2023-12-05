@@ -1,5 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
-const initialState = {
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
+interface FilterState {
+  stock: boolean;
+  categories: string[];
+  keyword: string;
+}
+
+const initialState: FilterState = {
   stock: false,
   categories: [],
   keyword: "",
@@ -12,7 +19,7 @@ const filterSlice = createSlice({
     toggle: (state) => {
       state.stock = !state.stock;
     },
-    toggleCategories: (state, action) => {
+    toggleCategories: (state, action: PayloadAction<string>) => {
       if (!state.categories.includes(action.payload)) {
         state.categories.push(action.payload);
       } else {
@@ -21,7 +28,7 @@ const filterSlice = createSlice({
         );
       }
     },
-    keywordSearch: (state, action) => {
+    keywordSearch: (state, action: PayloadAction<string>) => {
       state.keyword = action.payload;
     },
   },

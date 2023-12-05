@@ -16,7 +16,7 @@ type ImageType = {
 };
 const ProductDetails = () => {
   const { id } = useParams();
-  console.log(id);
+
   const { data } = useGetSingProductQuery(id);
   const [count, setCount] = useState(1);
   return (
@@ -57,7 +57,7 @@ const ProductDetails = () => {
               <SwiperSlide key={image._id}>
                 <img
                   key={image._id}
-                  src={`http://localhost:5000/uploads/${image.filename}`}
+                  src={`https://fexi-furn-api.onrender.com/uploads/${image.filename}`}
                   alt={image.filename}
                 />
               </SwiperSlide>
